@@ -1,7 +1,7 @@
 package br.com.estudo.pedidos.service;
 
 import br.com.estudo.pedidos.dto.PedidoDTO;
-import br.com.estudo.pedidos.kafka.PedidoProducer;
+import br.com.estudo.pedidos.kafka.producer.PedidoProducer;
 import br.com.estudo.pedidos.model.Pedido;
 import br.com.estudo.pedidos.repository.PedidoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,14 +17,14 @@ public class PedidoService {
   private final ObjectMapper objectMapper;
 
   public Pedido criarPedido(PedidoDTO dto) throws Exception {
-    Pedido pedido = Pedido.builder()
+    var pedido = Pedido.builder()
         .produto(dto.getProduto())
         .quantidade(dto.getQuantidade())
         .status("CRIADO")
         .build();
-    Pedido salvo = repository.save(pedido);
-    producer.enviarPedido(objectMapper.writeValueAsString(salvo));
-    return salvo;
+    var pedidoSalvo = repository.save(pedido);
+    producer.enviarPedido(objectMapper.writeValueAsString(pedidoSalvo));
+    return pedidoSalvo;
   }
 
 }
