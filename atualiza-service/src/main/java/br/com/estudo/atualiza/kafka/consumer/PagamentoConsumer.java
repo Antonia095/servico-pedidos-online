@@ -1,7 +1,7 @@
-package br.com.estudo.status.kafka.consumer;
+package br.com.estudo.atualiza.kafka.consumer;
 
-import br.com.estudo.status.dto.PedidoDTO;
-import br.com.estudo.status.repository.PedidoRepository;
+import br.com.estudo.atualiza.dto.PedidoDTO;
+import br.com.estudo.atualiza.repository.PedidoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;

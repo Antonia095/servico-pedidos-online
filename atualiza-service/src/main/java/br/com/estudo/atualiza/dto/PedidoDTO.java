@@ -1,6 +1,6 @@
-package br.com.estudo.status.dto;
+package br.com.estudo.atualiza.dto;
 
-import br.com.estudo.status.enums.StatusPedido;
+import br.com.estudo.atualiza.enums.StatusPedido;
 import java.math.BigDecimal;
 import lombok.Data;
 

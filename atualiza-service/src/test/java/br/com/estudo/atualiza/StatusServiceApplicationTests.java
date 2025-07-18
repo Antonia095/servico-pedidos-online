@@ -1,4 +1,4 @@
-package br.com.estudo.status;
+package br.com.estudo.atualiza;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

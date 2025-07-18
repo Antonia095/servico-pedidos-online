@@ -1,4 +1,4 @@
-package br.com.estudo.status.enums;
+package br.com.estudo.atualiza.enums;
 
 public enum StatusPedido {
 

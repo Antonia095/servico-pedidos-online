@@ -9,10 +9,10 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>br.com.estudo</groupId>
-  <artifactId>status-service</artifactId>
+  <artifactId>atualiza-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>status-service</name>
-  <description>status-service</description>
+  <name>atualiza-service</name>
+  <description>atualiza-service</description>
   <url/>
   <licenses>
     <license/>

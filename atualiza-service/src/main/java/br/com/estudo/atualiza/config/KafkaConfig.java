@@ -1,4 +1,4 @@
-package br.com.estudo.status.config;
+package br.com.estudo.atualiza.config;
 
 import java.util.HashMap;
 import java.util.Map;

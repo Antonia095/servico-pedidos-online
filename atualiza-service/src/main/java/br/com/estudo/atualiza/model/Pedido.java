@@ -1,6 +1,6 @@
-package br.com.estudo.status.model;
+package br.com.estudo.atualiza.model;
 
-import br.com.estudo.status.enums.StatusPedido;
+import br.com.estudo.atualiza.enums.StatusPedido;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
