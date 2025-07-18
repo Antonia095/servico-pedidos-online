@@ -5,12 +5,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/pedidos
+    url: jdbc:postgresql://postgres:5432/pedidos
     username: postgres
     password: postgres
   jpa:
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
   kafka:
     bootstrap-servers: localhost:9092
