@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/pedidos
+    url: jdbc:postgresql://localhost:5432/pedidos
     username: postgres
     password: postgres
   jpa:

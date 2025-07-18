@@ -1,4 +1,4 @@
-#spring.application.name=status-service
+#spring.application.name=atualiza-service
 
 server:
   port: 8080

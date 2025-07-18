@@ -1,7 +1,7 @@
 #spring.application.name=pedido-service
 
 server:
-  port: 8080
+  port: 8082
 
 spring:
   datasource:
