@@ -2,6 +2,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15
+    container_name: pedidos-postgres
     environment:
       POSTGRES_DB: pedidos
       POSTGRES_USER: postgres
@@ -10,19 +11,50 @@ services:
       - "5432:5432"
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
-    container_name: zookeeper
+    container_name: pedidos-zookeeper
     ports:
       - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
   kafka:
     image: confluentinc/cp-kafka:7.5.0
-    container_name: kafka
+    container_name: pedidos-kafka
     ports:
       - "9092:9092"
-    depends_on:
-      - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  atualiza-service:
+    build: ./atualiza-service
+    container_name: status-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+      - postgres
+
+  pagamento-service:
+    build: ./pagamento-service
+    container_name: pagamento-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - kafka
+      - postgres
+
+  pedido-service:
+    build: ./pedido-service
+    container_name: pedido-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - kafka
+      - postgres
+
+
+
