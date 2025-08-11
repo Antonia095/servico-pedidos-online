@@ -28,7 +28,7 @@ O projeto possue 3 microsserviços que se comunicam entre si via Kafka. São ele
 
 ## Passos para Execução
 
-Na pasta raiz do projeto esxecutar os seguintes passos
+Na pasta raiz do projeto executar os seguintes passos
 
 ### 1. Executar com Docker Compose
 ```bash
@@ -41,7 +41,7 @@ Este comando irá:
 
 ### 2. Testar a aplicação
 
-Para testar a aplicação envie um perdido usando o curl no Postman ou qualque cliente HTTP
+Para testar a aplicação envie um pedido usando o curl no Postman ou qualque cliente HTTP
 
 ```bash
 curl -X POST http://localhost:8080/pedidos \
@@ -50,7 +50,7 @@ curl -X POST http://localhost:8080/pedidos \
 ```
 Com isso o sistema seguirar o seguinte fluxo:
 
-- O pedido serpa publicado via pedido-service
+- O pedido será publicado via pedido-service
 - O processamento de pagamento será simulado no pagamento-service
 - O status do pedido será atualizado no atualizar-service
 
