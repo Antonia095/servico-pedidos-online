@@ -16,7 +16,7 @@ public class PedidoConsumer {
   private final KafkaTemplate<String, String> kafkaTemplate;
   private final ObjectMapper objectMapper;
 
-  @KafkaListener(topics = "novo-pedido", groupId = "pagamento")
+  @KafkaListener(topics = "novo-pedido", groupId = "pagamento-group")
   public void consumirNovoPedido(String mensagem) throws Exception {
 
     var pedidoDTO = objectMapper.readValue(mensagem, PedidoDTO.class);

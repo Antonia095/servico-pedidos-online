@@ -1,18 +1,21 @@
 #spring.application.name=atualiza-service
 
-server:
-  port: 8083
-
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/pedidos
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/pedidos_db
+    username: your_username
+    password: your_password
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
-  kafka:
-    bootstrap-servers: kafka:9092
+
+kafka:
+  bootstrap-servers: localhost:9092
+  consumer:
+    group-id: atualiza-pagamento-group
+    auto-offset-reset: earliest
+
+server:
+  port: 8083

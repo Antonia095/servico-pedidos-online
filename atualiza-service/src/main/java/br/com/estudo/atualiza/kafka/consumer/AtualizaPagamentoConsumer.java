@@ -14,7 +14,7 @@ public class AtualizaPagamentoConsumer {
   private final PedidoRepository repository;
   private final ObjectMapper objectMapper;
 
-  @KafkaListener(topics = "pagamento-processado", groupId = "status")
+  @KafkaListener(topics = "pagamento-processado", groupId = "atualiza-pagamento-group")
   public void consumirPagamentoProcessado(String mensagem) throws Exception {
 
     var pedidoDTO = objectMapper.readValue(mensagem, PedidoDTO.class);

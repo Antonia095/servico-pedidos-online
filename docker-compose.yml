@@ -1,60 +1,72 @@
 version: '3.8'
 services:
   postgres:
-    image: postgres:15
+    image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_DB: pedidos
+      POSTGRES_DB: pedidos_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.0
-    container_name: zookeeper
+    image: wurstmeister/zookeeper:latest
     ports:
       - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
   kafka:
-    image: confluentinc/cp-kafka:7.5.0
-    container_name: kafka
+    image: wurstmeister/kafka:latest
     ports:
       - "9092:9092"
     environment:
-      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_LISTENERS: INSIDE://0.0.0.0:9092,OUTSIDE://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   atualiza-service:
-    build: ./atualiza-service
-    container_name: atualiza-service
+    build:
+       context: ./atualiza-service
     ports:
-      - "8083:8083"
+      - "8083:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pedidos_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     depends_on:
-      - kafka
       - postgres
+      - kafka
 
   pagamento-service:
-    build: ./pagamento-service
-    container_name: pagamento-service
+    build:
+       context: ./pagamento-service
     ports:
-      - "8081:8081"
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pedidos_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     depends_on:
-      - kafka
       - postgres
+      - kafka
 
   pedido-service:
-    build: ./pedido-service
-    container_name: pedido-service
+    build:
+       context: ./pedido-service
     ports:
-      - "8082:8082"
+      - "8082:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pedidos_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     depends_on:
-      - kafka
       - postgres
+      - kafka
 
-
+volumes:
+  postgres_data:
 
