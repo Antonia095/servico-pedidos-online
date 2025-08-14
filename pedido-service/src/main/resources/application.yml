@@ -2,20 +2,20 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/pedidos_db
-    username: your_username
-    password: your_password
+    url: jdbc:postgresql://postgres:5432/pedidos_db
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-kafka:
-  bootstrap-servers: localhost:9092
-  topic:
-    novo-pedido: novo-pedido-topic
-    pagamento-processado: pagamento-processado-topic
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic:
+      novo-pedido: novo-pedido-topic
+      pagamento-processado: pagamento-processado-topic
 
 server:
   port: 8082

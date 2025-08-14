@@ -8,10 +8,12 @@ import br.com.estudo.pedidos.model.Pedido;
 import br.com.estudo.pedidos.repository.PedidoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PedidoService {
 
   private final PedidoRepository repository;
@@ -27,6 +29,7 @@ public class PedidoService {
         .build();
 
     var pedidoSalvo = repository.save(pedido);
+    log.info("Pedido salvo com sucesso!");
 
     producer.enviarPedido(objectMapper.writeValueAsString(pedidoSalvo));
 

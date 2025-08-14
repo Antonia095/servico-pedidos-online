@@ -20,7 +20,6 @@
 	<modules>
 		<module>pedido-service</module>
 		<module>pagamento-service</module>
-		<module>atualiza-service</module>
 	</modules>
 
 	<properties>

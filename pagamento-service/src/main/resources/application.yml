@@ -1,21 +1,15 @@
 #spring.application.name=pagamento-service
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/pedidos_db
-    username: your_username
-    password: your_password
-    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-kafka:
-  bootstrap-servers: localhost:9092
-  consumer:
-    group-id: pagamento-group
-    auto-offset-reset: earliest
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: pagamento-group
+      auto-offset-reset: earliest
 
 server:
   port: 8081

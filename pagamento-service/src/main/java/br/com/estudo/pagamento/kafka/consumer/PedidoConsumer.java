@@ -22,6 +22,19 @@ public class PedidoConsumer {
     var pedidoDTO = objectMapper.readValue(mensagem, PedidoDTO.class);
     pedidoDTO.setStatus(PAGO);
 
+    imprimePedido(pedidoDTO);
+
     kafkaTemplate.send("pagamento-processado", objectMapper.writeValueAsString(pedidoDTO));
+  }
+
+  private void imprimePedido(PedidoDTO pedidoDTO) {
+
+    System.out.println("Pagamento processado para o pedido:");
+    System.out.println("ID: " + pedidoDTO.getId());
+    System.out.println("Produto: " + pedidoDTO.getProduto());
+    System.out.println("Quantidade: " + pedidoDTO.getQuantidade());
+    System.out.println("Status: " + pedidoDTO.getStatus());
+    System.out.println("Valor: R$ " + pedidoDTO.getValor());
+
   }
 }

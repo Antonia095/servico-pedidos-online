@@ -6,6 +6,7 @@ import br.com.estudo.pedidos.repository.PedidoRepository;
 import br.com.estudo.pedidos.service.PedidoService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,8 @@ public class PedidoController {
   private final PedidoRepository repository;
 
   @PostMapping
-  public ResponseEntity<Pedido> criarPedido(@RequestBody PedidoDTO pedido) throws Exception {
-    var pedidoSalvo = service.criarPedido(pedido);
+  public ResponseEntity<Pedido> criarPedido(@RequestBody PedidoDTO pedidoDTO) throws Exception {
+    var pedidoSalvo = service.criarPedido(pedidoDTO);
     return ResponseEntity.ok(pedidoSalvo);
   }
 
